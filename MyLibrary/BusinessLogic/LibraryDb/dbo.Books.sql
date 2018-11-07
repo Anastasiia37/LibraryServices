@@ -1,6 +1,0 @@
-﻿CREATE TABLE [dbo].[Table]
-(
-	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1), 
-    [Name] NVARCHAR(200) NOT NULL, 
-    [Year] INT NOT NULL CHECK([Year] <= YEAR(GETDATE()))
-)

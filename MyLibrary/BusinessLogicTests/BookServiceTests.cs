@@ -152,11 +152,11 @@ namespace BusinessLogicTests
             var libraryService = new BookService(mockDataProvider.Object);
 
             // Act
-            int idOfAddedBook = libraryService.Add(bookForAdding);
+            int addedBookId = libraryService.Add(bookForAdding);
 
             // Assert
             mockDataProvider.Verify(mock => mock.AddBook(bookForAdding), Times.Once());
-            Assert.AreEqual(bookForAdding.Id, idOfAddedBook);
+            Assert.AreEqual(bookForAdding.Id, addedBookId);
         }
 
         /// <summary>
@@ -181,13 +181,13 @@ namespace BusinessLogicTests
             var libraryService = new BookService(mockDataProvider.Object);
 
             // Act
-            int? idOfUpdatedBook = libraryService.Update(bookIdForUpdating, bookForUpdating);
-            Book actualUpdatedBook = libraryService.ListOfAll.FirstOrDefault(b => b.Id == idOfUpdatedBook);
+            int? updatedBookId = libraryService.Update(bookIdForUpdating, bookForUpdating);
+            Book actualUpdatedBook = libraryService.ListOfAll.FirstOrDefault(b => b.Id == updatedBookId);
 
             // Assert
             Assert.AreEqual(expectedBookAfterUpdating.Name, actualUpdatedBook.Name);
             Assert.AreEqual(expectedBookAfterUpdating.Year, actualUpdatedBook.Year);
-            Assert.AreEqual(bookIdForUpdating, idOfUpdatedBook);
+            Assert.AreEqual(bookIdForUpdating, updatedBookId);
         }
 
         /// <summary>
@@ -212,11 +212,11 @@ namespace BusinessLogicTests
             Book expectedBookAfterUpdating = new Book { Id = 3, Name = name, Year = year };
 
             // Act
-            int? idOfUpdatedBook = libraryService.Update(bookIdForUpdating, bookForUpdating);
-            Book actualUpdatedBook = libraryService.ListOfAll.FirstOrDefault(b => b.Id == idOfUpdatedBook);
+            int? updatedBookId = libraryService.Update(bookIdForUpdating, bookForUpdating);
+            Book actualUpdatedBook = libraryService.ListOfAll.FirstOrDefault(b => b.Id == updatedBookId);
 
             // Assert
-            Assert.IsNull(idOfUpdatedBook);
+            Assert.IsNull(updatedBookId);
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace BusinessLogicTests
             var libraryService = new BookService(mockDataProvider.Object);
 
             // Act
-            int actualIdOfAddedPair = libraryService.AddAuthorToBook(bookId, authorId);
+            int actualAddedPairId = libraryService.AddAuthorToBook(bookId, authorId);
 
             // Assert
             mockDataProvider.Verify(mock => mock.AddBookAuthorPair(It.IsAny<BookAuthorPair>()), Times.Once());
@@ -276,7 +276,7 @@ namespace BusinessLogicTests
             var libraryService = new BookService(mockDataProvider.Object);
 
             // Act
-            int actualIdOfAddedPair = libraryService.AddAuthorToBook(bookId, authorId);
+            int actualAddedPairId = libraryService.AddAuthorToBook(bookId, authorId);
 
             // Assert
             mockDataProvider.Verify(mock => mock.AddBookAuthorPair(It.IsAny<BookAuthorPair>()), Times.Never());
@@ -306,13 +306,13 @@ namespace BusinessLogicTests
             mockDataProvider.SetupGet(mock => mock.Authors).Returns(new List<Author> { author });
             mockDataProvider.SetupGet(mock => mock.PairsBookAuthor).Returns(pairBookAuthor);
             var libraryService = new BookService(mockDataProvider.Object);
-            int expectedIdOfRemovedPair = 2;
+            int expectedRemovedPairId = 2;
 
             // Act
-            int? actualIdOfRemovedPair = libraryService.RemoveAuthorFromBook(bookId, authorId);
+            int? actualRemovedPairId = libraryService.RemoveAuthorFromBook(bookId, authorId);
 
             // Assert
-            Assert.AreEqual(expectedIdOfRemovedPair, actualIdOfRemovedPair);
+            Assert.AreEqual(expectedRemovedPairId, actualRemovedPairId);
             mockDataProvider.Verify(mock => mock.RemoveBookAuthorPair(It.IsAny<BookAuthorPair>()), Times.Once());
         }
 
@@ -341,10 +341,10 @@ namespace BusinessLogicTests
             var libraryService = new BookService(mockDataProvider.Object);
 
             // Act
-            int? actualIdOfAddedPair = libraryService.RemoveAuthorFromBook(bookId, authorId);
+            int? actualAddedPairId = libraryService.RemoveAuthorFromBook(bookId, authorId);
 
             // Assert
-            Assert.IsNull(actualIdOfAddedPair);
+            Assert.IsNull(actualAddedPairId);
             mockDataProvider.Verify(mock => mock.RemoveBookAuthorPair(It.IsAny<BookAuthorPair>()), Times.Never());
         }
 
@@ -376,10 +376,10 @@ namespace BusinessLogicTests
             var libraryService = new BookService(mockDataProvider.Object);
 
             // Act
-            int? actualIdOfAddedPair = libraryService.RemoveAuthorFromBook(bookId, authorId);
+            int? actualAddedPairId = libraryService.RemoveAuthorFromBook(bookId, authorId);
 
             // Assert
-            Assert.IsNull(actualIdOfAddedPair);
+            Assert.IsNull(actualAddedPairId);
             mockDataProvider.Verify(mock => mock.RemoveBookAuthorPair(It.IsAny<BookAuthorPair>()), Times.Never());
         }
 
@@ -405,13 +405,13 @@ namespace BusinessLogicTests
             mockDataProvider.SetupGet(mock => mock.Authors).Returns(new List<Author> { author });
             mockDataProvider.SetupGet(mock => mock.PairsBookAuthor).Returns(pairBookAuthor);
             var libraryService = new BookService(mockDataProvider.Object);
-            int expectedCountOfBooks = 1;
+            int expectedBooksCount = 1;
 
             // Act
             List<Book> books = libraryService.GetBooksByAuthor(authorId).ToList();
 
             // Assert
-            Assert.AreEqual(expectedCountOfBooks, books.Count);
+            Assert.AreEqual(expectedBooksCount, books.Count);
             Assert.AreEqual(book.Name, books[0].Name);
             Assert.AreEqual(book.Year, books[0].Year);
         }
@@ -439,13 +439,13 @@ namespace BusinessLogicTests
             mockDataProvider.SetupGet(mock => mock.Authors).Returns(new List<Author> { author });
             mockDataProvider.SetupGet(mock => mock.PairsBookAuthor).Returns(pairBookAuthor);
             var libraryService = new BookService(mockDataProvider.Object);
-            int expectedCountOfBooks = 1;
+            int expectedBooksCount = 1;
 
             // Act
             List<Book> books = libraryService.GetBooksByAuthor(authorId).ToList();
 
             // Assert
-            Assert.AreEqual(expectedCountOfBooks, books.Count);
+            Assert.AreEqual(expectedBooksCount, books.Count);
             Assert.AreEqual(book.Name, books[0].Name);
             Assert.AreEqual(book.Year, books[0].Year);
         }

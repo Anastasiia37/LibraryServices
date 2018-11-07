@@ -141,11 +141,11 @@ namespace BusinessLogicTests
             var libraryService = new AuthorService(mockDataProvider.Object);
 
             // Act
-            int idOfAddedAuthor = libraryService.Add(authorForAdding);
+            int addedAuthorId = libraryService.Add(authorForAdding);
 
             // Assert
             mockDataProvider.Verify(mock => mock.AddAuthor(authorForAdding), Times.Once());
-            Assert.AreEqual(authorForAdding.Id, idOfAddedAuthor);
+            Assert.AreEqual(authorForAdding.Id, addedAuthorId);
         }
 
         /// <summary>
@@ -168,13 +168,13 @@ namespace BusinessLogicTests
             var libraryService = new AuthorService(mockDataProvider.Object);
 
             // Act
-            int? idOfUpdatedAuthor = libraryService.Update(authorIdForUpdating, authorForUpdating);
+            int? updatedAuthorId = libraryService.Update(authorIdForUpdating, authorForUpdating);
             Author actualUpdatedAuthor =
-                libraryService.ListOfAll.FirstOrDefault(a => a.Id == idOfUpdatedAuthor);
+                libraryService.ListOfAll.FirstOrDefault(a => a.Id == updatedAuthorId);
 
             // Assert
             Assert.AreEqual(expectedAuthorAfterUpdating.FullName, actualUpdatedAuthor.FullName);
-            Assert.AreEqual(authorIdForUpdating, idOfUpdatedAuthor);
+            Assert.AreEqual(authorIdForUpdating, updatedAuthorId);
         }
 
         /// <summary>
@@ -197,11 +197,11 @@ namespace BusinessLogicTests
             Author expectedAuthorAfterUpdating = new Author { Id = 3, FullName = name };
 
             // Act
-            int? idOfUpdatedAuthor = libraryService.Update(authorIdForUpdating, authorForUpdating);
-            Author actualUpdatedAuthor = libraryService.ListOfAll.FirstOrDefault(a => a.Id == idOfUpdatedAuthor);
+            int? updatedAuthorId = libraryService.Update(authorIdForUpdating, authorForUpdating);
+            Author actualUpdatedAuthor = libraryService.ListOfAll.FirstOrDefault(a => a.Id == updatedAuthorId);
 
             // Assert
-            Assert.IsNull(idOfUpdatedAuthor);
+            Assert.IsNull(updatedAuthorId);
         }
     }
 }

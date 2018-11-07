@@ -126,10 +126,10 @@ namespace BusinessLogic.LibraryService
                 this.dataProvider.Save();
             }
 
-            int idOfDeletedBook = bookForDelete.Id;
+            int DeletedBookId = bookForDelete.Id;
             this.dataProvider.RemoveBook(bookForDelete);
             this.dataProvider.Save();
-            return idOfDeletedBook;
+            return DeletedBookId;
         }
 
         #endregion BookServices

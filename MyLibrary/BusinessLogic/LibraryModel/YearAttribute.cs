@@ -36,8 +36,8 @@ namespace BusinessLogic.LibraryModel
                 }
             }
 
-            this.ErrorMessage = $"The year of publishing must be in range from {MINIMUM_YEAR} "
-                + "to this year!";
+            this.ErrorMessage = $"The year of publishing must be in range "
+                              + $"from {MINIMUM_YEAR} to this year!";
             return false;
         }
     }

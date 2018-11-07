@@ -9,7 +9,9 @@ namespace BusinessLogic.LibraryService
     /// <summary>
     /// Interface for services connected to Library
     /// </summary>
-    /// <typeparam name="T">Type from Library model: Book, Author or Genre</typeparam>
+    /// <typeparam name="T">
+    /// Type from Library model: Book, Author or Genre
+    /// </typeparam>
     public interface ILibraryService<T>
     {
         /// <summary>
@@ -40,7 +42,10 @@ namespace BusinessLogic.LibraryService
         /// </summary>
         /// <param name="id">The T entity identifier</param>
         /// <param name="item">The new T entity</param>
-        /// <returns>The id of updated T entity or null if there isn`t T entity with specified id</returns>
+        /// <returns>
+        /// The id of updated T entity
+        /// or null if there isn`t T entity with specified id
+        /// </returns>
         int? Update(int id, T item);
 
         /// <summary>

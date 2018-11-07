@@ -32,7 +32,7 @@ namespace Library
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string con = "Server=(localdb)\\mssqllocaldb;Database=librarydb;Trusted_Connection=True;MultipleActiveResultSets=true";
+            string con = "Server=(localdb)\\mssqllocaldb;Database=LibDb;Trusted_Connection=True;MultipleActiveResultSets=true";
             services.AddDbContext<IDataProvider, LibraryContext>(options => options.UseSqlServer(con));
             services.AddScoped<IGenreService, GenreService>();
             services.AddScoped<IBookService, BookService>();
@@ -49,10 +49,15 @@ namespace Library
                 c.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",
-                    Title = "My API",
-                    Description = "My First ASP.NET Core Web API",
+                    Title = "MyLibraryAPI",
+                    Description = "Using ASP.NET Core Web API 2.0",
                     TermsOfService = "None",
-                    Contact = new Contact() { Name = "Talking Dotnet", Email = "contact@talkingdotnet.com", Url = "www.talkingdotnet.com" }
+                    Contact = new Contact()
+                    {
+                        Name = "Anastasiia Peretiatko",
+                        Email = "_nastya_@ua.fm",
+                        Url = "github.com/Anastasiia37"
+                    }
                 });
             });
         }
